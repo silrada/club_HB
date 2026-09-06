@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Свидетели Ханки Банистера · Клуб Черчилля</title>
+    <!-- Font Awesome (иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== СБРОС И БАЗА ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5efe7;
+            color: #3e2e22;
+            line-height: 1.5;
+        }
+
+        /* ===== ТЁПЛАЯ ПАЛИТРА ===== */
+        :root {
+            --brown-dark: #4a3222;
+            --brown-medium: #6b4c3b;
+            --brown-light: #a3826a;
+            --cream: #f2e6d9;
+            --cream-light: #fcf7f0;
+            --gold-accent: #c9a87c;
+            --shadow: 0 8px 24px rgba(60, 40, 28, 0.08);
+        }
+
+        /* ===== НАВИГАЦИЯ (липкая) ===== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(74, 50, 34, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #b4947a;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #f2e6d9;
+            letter-spacing: 1px;
+        }
+        .logo i {
+            color: #d4b48c;
+            margin-right: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #f0e0d0;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1rem;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.25s ease;
+        }
+        .nav-links a:hover {
+            color: #f7ede0;
+            border-bottom-color: #d4b48c;
+            transform: translateY(-1px);
+        }
+        .nav-links a i {
+            margin-right: 6px;
+            color: #c9a87c;
+        }
+
+        /* ===== ГЛАВНЫЙ ГЕРОЙ ===== */
+        .hero {
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(145deg, #e6d6c4 0%, #d4bfab 100%);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" opacity="0.06"><path d="M120 40 L140 10 L160 40 L200 20 L180 55 L210 70 L180 85 L200 110 L170 95 L150 120 L130 95 L100 110 L120 85 L90 70 L120 55 L100 20 L120 40" fill="%236b4c3b"/><circle cx="300" cy="100" r="30" fill="%236b4c3b"/></svg>');
+            background-size: cover;
+            background-blend-mode: overlay;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(242, 230, 217, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            background: rgba(242, 230, 217, 0.6);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            padding: 2.8rem 3rem;
+            border-radius: 48px 16px 48px 16px;
+            box-shadow: 0 20px 40px rgba(60, 40, 28, 0.2);
+            border: 1px solid rgba(255, 242, 232, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            color: #2d1f14;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 12px rgba(255, 215, 175, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        .hero h1 i {
+            color: #b48b68;
+            margin: 0 6px;
+        }
+        .hero .slogan {
+            font-size: 1.7rem;
+            font-weight: 300;
+            color: #4a3222;
+            margin-bottom: 1.8rem;
+            letter-spacing: 2px;
+            border-top: 2px solid #b4947a;
+            border-bottom: 2px solid #b4947a;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            background: rgba(255, 242, 232, 0.4);
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #3e2e22;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background: #6b4c3b;
+            color: #fcf7f0;
+            padding: 1rem 3.2rem;
+            border-radius: 60px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 18px rgba(74, 50, 34, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid #b4947a;
+            backdrop-filter: blur(2px);
+        }
+        .btn-cta i {
+            margin-right: 12px;
+        }
+        .btn-cta:hover {
+            background: #4a3222;
+            transform: scale(1.03) translateY(-4px);
+            box-shadow: 0 14px 28px rgba(74, 50, 34, 0.4);
+            border-color: #d4b48c;
+            color: #fff6e8;
+        }
+
+        /* ===== СЕКЦИИ ОБЩИЕ ===== */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: #3e2a1c;
+            border-left: 8px solid #b4947a;
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+        }
+        .section-title i {
+            color: #8b6b52;
+            margin-right: 12px;
+        }
+
+        /* ===== О КЛУБЕ ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+            background: #fcf7f0;
+            padding: 2.5rem;
+            border-radius: 40px 12px 40px 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e3d3c2;
+        }
+        .about-text {
+            font-size: 1.1rem;
+            color: #3e2e22;
+        }
+        .about-text p {
+            margin-bottom: 1.2rem;
+        }
+        .about-text strong {
+            color: #6b4c3b;
+        }
+        .about-photo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .about-photo img {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+            border-radius: 30px 8px 30px 8px;
+            box-shadow: 0 12px 24px rgba(60, 40, 28, 0.15);
+            border: 3px solid #f2e6d9;
+            transition: 0.4s ease;
+            background: #d4bfab;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+        .about-photo img:hover {
+            transform: scale(1.04) rotate(1deg);
+            border-color: #b4947a;
+            box-shadow: 0 16px 32px rgba(60, 40, 28, 0.25);
+        }
+
+        /* ===== МЕНЮ (ПРЕВЬЮ) ===== */
+        .menu-preview {
+            background: #f2e6d9;
+            border-radius: 40px 12px 40px 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .menu-card {
+            background: #fcf7f0;
+            padding: 1.8rem 1.2rem;
+            border-radius: 28px 8px 28px 8px;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(74, 50, 34, 0.06);
+            transition: all 0.25s ease;
+            border: 1px solid #e3d3c2;
+            backdrop-filter: blur(2px);
+        }
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 20px 32px rgba(74, 50, 34, 0.12);
+            border-color: #b4947a;
+            background: #fffbf7;
+        }
+        .menu-card i {
+            font-size: 2.8rem;
+            color: #6b4c3b;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .menu-card h3 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #3e2a1c;
+            margin-bottom: 0.3rem;
+        }
+        .menu-card .detail {
+            font-size: 1rem;
+            color: #6b4c3b;
+            background: #efe2d4;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            margin: 0.4rem 0 0.2rem;
+            font-weight: 400;
+        }
+        .menu-card .price {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #4a3222;
+            background: #d4bfab;
+            display: inline-block;
+            padding: 0.1rem 1.4rem;
+            border-radius: 40px;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            background: #fcf7f0;
+            padding: 2.5rem;
+            border-radius: 40px 12px 40px 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e3d3c2;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.2rem;
+            background: #f2e6d9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 60px;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+        .contact-item i {
+            width: 2.2rem;
+            font-size: 1.7rem;
+            color: #6b4c3b;
+        }
+        .contact-item:hover {
+            border-color: #b4947a;
+            background: #fcf7f0;
+            transform: translateX(6px);
+        }
+        .contact-item strong {
+            font-weight: 600;
+            color: #4a3222;
+        }
+        .map-placeholder {
+            background: #d4bfab;
+            border-radius: 30px 8px 30px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            color: #3e2e22;
+            font-size: 1.2rem;
+            border: 2px dashed #b4947a;
+            padding: 1.5rem;
+            transition: 0.2s;
+        }
+        .map-placeholder i {
+            font-size: 4rem;
+            color: #6b4c3b;
+            margin-bottom: 0.8rem;
+        }
+        .map-placeholder:hover {
+            background: #e6d6c4;
+            border-color: #8b6b52;
+        }
+
+        /* ===== ФУТЕР ===== */
+        .footer {
+            background: #3e2e22;
+            color: #d4bfab;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 4px solid #b4947a;
+        }
+        .footer i {
+            color: #c9a87c;
+            margin: 0 6px;
+        }
+
+        /* ===== АДАПТИВ ===== */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero .slogan { font-size: 1.3rem; }
+            .about-grid, .contact-wrap { grid-template-columns: 1fr; }
+            .about-photo { justify-content: center; }
+            .navbar { padding: 0.6rem 1.2rem; }
+            .nav-links { gap: 1rem; }
+            .section-title { font-size: 2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content { padding: 1.8rem 1.2rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero .slogan { font-size: 1.0rem; padding: 0.2rem 0.8rem; }
+            .btn-cta { padding: 0.8rem 2rem; font-size: 1rem; }
+            .navbar { flex-direction: column; gap: 0.4rem; }
+            .nav-links a { font-size: 0.9rem; }
+            .menu-grid { grid-template-columns: 1fr 1fr; }
+            .contact-item { font-size: 1rem; padding: 0.6rem 1rem; }
+            .about-photo img { max-width: 120px; }
+        }
+
+        @media (max-width: 420px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+
+        /* анимация при загрузке (доп. эффект) */
+        .hero-content {
+            animation: fadeSlide 0.9s ease-out;
+        }
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== НАВИГАЦИЯ ===== -->
+<nav class="navbar" id="top">
+    <div class="logo">
+        <i class="fas fa-whiskey-glass"></i> Свидетели Ханки
+    </div>
+    <div class="nav-links">
+        <a href="#about"><i class="fas fa-landmark"></i> О клубе</a>
+        <a href="#menu"><i class="fas fa-martini-glass-citrus"></i> Меню</a>
+        <a href="#contact"><i class="fas fa-location-dot"></i> Контакты</a>
+    </div>
+</nav>
+
+<!-- ===== ГЕРОЙ ===== -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1><i class="fas fa-crown"></i> Черчилль <i class="fas fa-feather-pointed"></i></h1>
+        <div class="slogan">«Стойкость и виски»</div>
+        <p class="sub">Закрытый клуб для избранных · Полтава</p>
+        <a href="#menu" class="btn-cta"><i class="fas fa-glass-cheers"></i> Открыть карту</a>
+    </div>
+</section>
+
+<!-- ===== О КЛУБЕ ===== -->
+<section id="about">
+    <h2 class="section-title"><i class="fas fa-flag"></i> О клубе</h2>
+    <div class="about-grid">
+        <div class="about-text">
+            <p><strong>«Свидетели Ханки Банистера»</strong> — частное заведение, где память Уинстона Черчилля живёт в каждой детали. Мы открыли двери в 2022 году, чтобы объединить ценителей истории, крепкого виски и камерной атмосферы.</p>
+            <p>Наши стены украшают редкие фотографии британского льва, а барная стойка хранит секреты лучших рецептов. Здесь не бывает случайных гостей — только те, кто разделяет страсть к традициям и безупречному вкусу.</p>
+            <p><i class="fas fa-quote-left" style="color:#6b4c3b;"></i> Мы не подаём коктейли, мы подаём эпоху.</p>
+        </div>
+        <div class="about-photo">
+            <!-- Фотографии Черчилля (заглушки с инициалами) -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%236b4c3b'/%3E%3Ctext x='50' y='120' font-family='Georgia' font-size='70' fill='%23f2e6d9'%3EWC%3C/text%3E%3C/svg%3E" alt="Черчилль фото 1">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23a3826a'/%3E%3Ctext x='50' y='120' font-family='Georgia' font-size='70' fill='%23f2e6d9'%3EW%3C/text%3E%3C/svg%3E" alt="Черчилль фото 2">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%234a3222'/%3E%3Ctext x='50' y='120' font-family='Georgia' font-size='70' fill='%23f2e6d9'%3EWC%3C/text%3E%3C/svg%3E" alt="Черчилль фото 3">
+        </div>
+    </div>
+</section>
+
+<!-- ===== МЕНЮ (превью) ===== -->
+<section id="menu">
+    <h2 class="section-title"><i class="fas fa-utensils"></i> Фирменные напитки</h2>
+    <div class="menu-preview">
+        <div class="menu-grid">
+            <!-- виски Jameson -->
+            <div class="menu-card">
+                <i class="fas fa-whiskey-glass"></i>
+                <h3>Jameson</h3>
+                <span class="detail">50 мл</span>
+                <span class="price">100 ₴</span>
+                <div style="margin-top: 8px; font-size:0.9rem; color:#6b4c3b;">ирландский виски</div>
+            </div>
+            <!-- коньяк Ararat -->
+            <div class="menu-card">
+                <i class="fas fa-wine-bottle"></i>
+                <h3>Ararat</h3>
+                <span class="detail">50 мл</span>
+                <span class="price">100 ₴</span>
+                <div style="margin-top: 8px; font-size:0.9rem; color:#6b4c3b;">армянский коньяк</div>
+            </div>
+            <!-- водка Гетьман -->
+            <div class="menu-card">
+                <i class="fas fa-wine-glass"></i>
+                <h3>Гетьман</h3>
+                <span class="detail">50 мл</span>
+                <span class="price">100 ₴</span>
+                <div style="margin-top: 8px; font-size:0.9rem; color:#6b4c3b;">классическая водка</div>
+            </div>
+            <!-- чай по-турецки -->
+            <div class="menu-card">
+                <i class="fas fa-mug-hot"></i>
+                <h3>Чай по-турецки</h3>
+                <span class="detail">50 мл</span>
+                <span class="price">100 ₴</span>
+                <div style="margin-top: 8px; font-size:0.9rem; color:#6b4c3b;">с мёдом и лимоном</div>
+            </div>
+        </div>
+        <p style="text-align: right; margin-top: 1.5rem; font-style: italic; color:#6b4c3b; border-top:1px solid #d4bfab; padding-top:1rem;">
+            <i class="fas fa-book-open"></i> Полный ассортимент — в клубе
+        </p>
+    </div>
+</section>
+
+<!-- ===== КОНТАКТЫ ===== -->
+<section id="contact">
+    <h2 class="section-title"><i class="fas fa-address-card"></i> Контакты</h2>
+    <div class="contact-wrap">
+        <div class="contact-info">
+            <div class="contact-item"><i class="fas fa-clock"></i> <strong>Работаем:</strong> Пн–Вс 18:00 – 02:00</div>
+            <div class="contact-item"><i class="fas fa-location-dot"></i> <strong>Адрес:</strong> г. Полтава, ул. Соборности, 12</div>
+            <div class="contact-item"><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> +38 (066) 123-45-67</div>
+            <div class="contact-item"><i class="fas fa-envelope"></i> <strong>E-mail:</strong> club@hanka-b.com</div>
+            <div style="margin-top: 0.8rem; font-size: 0.95rem; background: #efe2d4; padding: 0.6rem 1.5rem; border-radius: 60px; display: inline-block;">
+                <i class="fas fa-key" style="margin-right: 8px;"></i> Вход по приглашениям
+            </div>
+        </div>
+        <div class="map-placeholder">
+            <i class="fas fa-map-pin"></i>
+            <span>📍 Полтава, центр</span>
+            <span style="font-size: 0.9rem; margin-top: 8px;">ул. Соборности, 12</span>
+            <span style="font-size: 0.8rem; opacity:0.8; margin-top: 6px;"><i class="fas fa-crown"></i> Клуб «Свидетели Ханки»</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ФУТЕР ===== -->
+<footer class="footer">
+    <p><i class="fas fa-crown"></i> Свидетели Ханки Банистера · Клуб памяти У. Черчилля <i class="fas fa-feather-pointed"></i></p>
+    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #b4947a;">г. Полтава · 2026 · Все права защищены</p>
+</footer>
+
+</body>
+</html>
